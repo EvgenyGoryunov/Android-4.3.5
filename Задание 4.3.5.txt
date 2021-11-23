@@ -1,0 +1,66 @@
+Задание:
+
+Дан список данных пользователей, с произвольным форматом даты рождения:
+Иванов Иван Иванович 11-01-1956
+Петров Петр Петрович 12.02.1947
+Сидоров Сидор Сидорович 14\03\1968
+Иванов Петр Сидорович 15+03+1987
+Петров Сидор Иванович 17=04=1973
+Сидоров Иван Петрович 20_05_1995
+
+Привести формат даты рождения к единому виду, с разделителем через точку (.), пример 11-01-1956, правильный формат 11.01.1956 и вывести список на экран.
+
+
+
+Код для задания:
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Test10 {
+
+    public static void main(String[] args) {
+
+          Vash code …
+        }
+    }
+}
+
+
+
+Правильный код:
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Test10 {
+
+    public static void main(String[] args) {
+
+        String text = "Иванов Иван Иванович 11-01-1956\n" +
+                "Петров Петр Петрович 12.02.1947\n" +
+                "Сидоров Сидор Сидорович 14/03/1968\n" +
+                "Иванов Петр Сидорович 15+03+1987\n" +
+                "Петров Сидор Иванович 17=04=1973\n" +
+                "Сидоров Иван Петрович 20_05_1995\n";
+        Pattern pat = Pattern.compile("\\d{2}.\\d{2}.\\d{4}");
+        Matcher mat = pat.matcher(text);
+        while (mat.find()) {
+            String qqq1 = mat.group().replace('-', '.');
+            String qqq2 = qqq1.replace('/', '.');
+            String qqq3 = qqq2.replace('+', '.');
+            String qqq4 = qqq3.replace('=', '.');
+            String qqq5 = qqq4.replace('_', '.');
+            System.out.println(qqq5);
+        }
+    }
+}
+
+
+Результат:
+11.01.1956
+12.02.1947
+14.03.1968
+15.03.1987
+17.04.1973
+20.05.1995
+
+
